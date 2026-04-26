@@ -37,7 +37,7 @@ $(document).ready(function(){
                     <td>${tarea.nombre}</td>
                     <td>${tarea.estado}</td>
                     <td>
-                    <button class="btn btn-sm btn-danger">Borrar</button>
+                    <button class="btn btn-sm btn-danger" data-id="${tarea.id}">Borrar</button>
                     <button class="btn btn-sm btn-success">Completar</button>
                 </td>
             </tr>
@@ -49,6 +49,28 @@ $(document).ready(function(){
             
         })
     }
+
+    $(document).on('click', '.btn-danger', function(){
+        let id = $(this).data('id');
+        if(!confirm('Seguro quieres borrar la tarea? ')){
+            return;
+        }
+
+        $.ajax({
+            url: 'api/borrar.php',
+            method: "POST",
+            data:{
+                id: id
+            },
+            success: function(respuesta){
+                console.log(respuesta);
+                cargarTareas();
+            },
+            error: function(){
+                console.log("Error")
+            }
+        })
+    })
 
 });
 
