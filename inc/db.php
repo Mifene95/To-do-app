@@ -1,13 +1,13 @@
 <?php
 
-$host = 'localhost';
-$db = 'todo';
-$user = 'root';
-$pass = '';
+$host = "localhost";
+$db_name = "todo";
+$user = "root";
+$password = "";
 
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);
+    $pdo = new PDO("mysql:host=$host;dbname=$db_name;charset=utf8", $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    exit("Error al conectar");
+    die('Error de conexion' . $e->getMessage());
 };
