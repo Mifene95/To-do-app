@@ -38,7 +38,7 @@ $(document).ready(function(){
                     <td>${tarea.estado}</td>
                     <td>
                     <button class="btn btn-sm btn-danger" data-id="${tarea.id}">Borrar</button>
-                    <button class="btn btn-sm btn-success">Completar</button>
+                    <button class="btn btn-sm btn-success" data-id="${tarea.id}">Completar</button>
                 </td>
             </tr>
                     `
@@ -71,6 +71,28 @@ $(document).ready(function(){
             }
         })
     })
+
+    $(document).on('click', '.btn-success', function(){
+
+        let id = $(this).data('id');
+
+        $.ajax({
+            url: 'api/editar.php',
+            method: 'POST',
+            data:{
+                id: id
+            },
+            success: function(respuesta){
+                console.log(respuesta);
+                cargarTareas();
+            },
+            error: function(){
+                console.log("Error")
+            }
+        })
+
+    })
+
 
 });
 
